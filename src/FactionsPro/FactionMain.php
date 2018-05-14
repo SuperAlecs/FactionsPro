@@ -11,7 +11,6 @@ use pocketmine\{Server, Player};
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\utils\{Config, TextFormat};
 use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\block\Snow;
 use pocketmine\math\Vector3;
 use pocketmine\entity\{Skeleton, Pig, Chicken, Zombie, Creeper, Cow, Spider, Blaze, Ghast};
 use pocketmine\level\{Position, Level};
@@ -354,7 +353,6 @@ class FactionMain extends PluginBase implements Listener {
     }
     public function drawPlot($sender, $faction, $x, $y, $z, $level, $size) {
         $arm = ($size - 1) / 2;
-        $block = new Air();
         if ($this->cornerIsInPlot($x + $arm, $z + $arm, $x - $arm, $z - $arm)) {
             $claimedBy = $this->factionFromPoint($x, $z);
             $power_claimedBy = $this->getFactionPower($claimedBy);
@@ -375,8 +373,6 @@ class FactionMain extends PluginBase implements Listener {
                 return false;
 	    }
         }
-        $level->setBlock(new Vector3($x + $arm, $y, $z + $arm), $block);
-        $level->setBlock(new Vector3($x - $arm, $y, $z - $arm), $block);
         $this->newPlot($faction, $x + $arm, $z + $arm, $x - $arm, $z - $arm);
         return true;
     }
